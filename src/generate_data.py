@@ -11,6 +11,12 @@ from modules import CrossTerms, SingleTerms
 
 class Config():
     dataset = 'dataset/'
+    output = 'outputs/'
+    label_font_size = 16
+    legend_font_size = 14
+    figsize = (9, 6)
+    bbox_anchor = (1, 1)
+    dpi_quality = 300
     nmax = 10
     nmin = -nmax
     mmax = nmax
@@ -32,6 +38,7 @@ class Config():
         l_b_vals = np.around(l_b_temp_values, decimals=2)
         gamma_vals = l_b_vals/l_a
         a_vals = [0.0]
+        plotting_a = 0.0
 
     elif dataType == "versus_energy_gap":
         l_a = 0.75
@@ -39,11 +46,12 @@ class Config():
         omega_values = np.arange(-100, 5+1, step=1)
         omega_values = omega_values/2
         a_vals = [0.0]
+        plotting_a = 0.0
 
     elif dataType == "versus_acceleration":
         l_a = 0.75
         l_b = 0.25
-        omega_vals = [-50]
+        omega_vals = [-50, 50]
         step_acceleration = 1
         a_temp_values = np.arange(
             0, 100+step_acceleration, step=step_acceleration)
@@ -93,7 +101,7 @@ if __name__ == '__main__':
             plt.plot(gamma_vals, pb_values)
             plt.show()
             df = pd.DataFrame([gamma_vals, l_b_vals, pa_values, pb_values, lab_values,
-                               pe_plus_values, pe_minus_values])
+                               pe_plus_values, pe_minus_values], index=['gamma', 'l_b', 'pa', 'pb', 'lab', 'pe_plus', 'pe_minus']).T
             df.to_excel(
                 f"{dataset}{cfg.dataType}/n_{nmax}_omega_{omega}_step_{step_length_ratio}_a_{a}.xlsx")
 
@@ -131,8 +139,11 @@ if __name__ == '__main__':
             plt.plot(omega_vals, pe_plus_values)
             plt.plot(omega_vals, pe_minus_values)
             plt.show()
-            df = pd.DataFrame([omega_vals, pa_values, pb_values,
-                              lab_values, pe_plus_values, pe_minus_values])
+            df = pd.DataFrame(
+                [omega_vals, pa_values, pb_values, lab_values,
+                    pe_plus_values, pe_minus_values],
+                index=['omegas', 'pa', 'pb', 'lab', 'pe_plus', 'pe_minus']).T
+            # print('dataset generated')
             df.to_excel(
                 f"{dataset}{cfg.dataType}/n_{nmax}_a_{a}_la_{l_a}_lb_{l_b}.xlsx")
 
@@ -174,6 +185,6 @@ if __name__ == '__main__':
             plt.plot(a_vals, pe_minus_values)
             plt.show()
             df = pd.DataFrame([a_vals, pa_values, pb_values,
-                              lab_values, pe_plus_values, pe_minus_values])
+                              lab_values, pe_plus_values, pe_minus_values], index=['a_vals', 'pa', 'pb', 'lab', 'pe_plus', 'pe_minus']).T
             df.to_excel(
                 f"{dataset}{cfg.dataType}/n_{nmax}_amax_{a_vals[-1]}_omega_{omega}_step_{step_acceleration}.xlsx")
