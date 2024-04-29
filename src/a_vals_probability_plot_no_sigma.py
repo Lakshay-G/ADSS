@@ -1,15 +1,10 @@
 import mpmath
-import scipy
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import quad, fixed_quad, nquad
+from scipy.integrate import quad
 import pandas as pd
-from math import erfc, erf
-from scipy.special import erf as Erf
-from sympy import Symbol, integrate
 import time
 import logging
-import os
 from mpmath import mp
 # np.seterr(all='warn')
 
