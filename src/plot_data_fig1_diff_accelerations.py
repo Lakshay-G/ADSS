@@ -46,6 +46,8 @@ if __name__ == "__main__":
 
     scaling = False
     print(len(gamma_vals_0))
+    plt.figure(figsize=(9, 6), dpi=300)
+
     if scaling:
         # plt.plot(gamma_vals_0[1:122], pe_plus_values_0[1:122]/pa_values_0[1:122],
         #          '-r', label=r"$a \sigma = 0$", lw=0.75)
@@ -57,14 +59,16 @@ if __name__ == "__main__":
         #          '-g', label=r"$a = 10$", lw=0.75)
         # plt.plot(gamma_vals_100[1:], pe_plus_values_100[1:]/pa_values_100[1:],
         #          '-y', label=r"$a = 100$", lw=0.75)
-        plt.ylabel(r"Detector response $\propto P_E^{(+)} / P_A$", fontsize=14)
+        plt.ylabel(r"Detector response $\propto P_E^{(+)} / P_A$", fontsize=18)
     else:
-        # plt.plot(gamma_vals_0[1:122], pe_plus_values_0[1:122],
-        #          '-r', label=r"$a \sigma = 0$", lw=0.75)
-        # plt.plot(gamma_vals_2[1:122], pe_plus_values_2[1:122],
-        #          '-b', label=r"$a \sigma = 2$", lw=0.75)
-        # plt.plot(gamma_vals_10[1+3000:], pe_plus_values_10[1+3000:],
-        #          '-g', label=r"$a \sigma = 10$", lw=0.75)
+        plt.plot(gamma_vals_0[1:122], pe_plus_values_0[1:122],
+                 '-r', label=r"$a \sigma = 0$", lw=0.75)
+        plt.plot(gamma_vals_2[1:122], pe_plus_values_2[1:122],
+                 '-b', label=r"$a \sigma = 2$", lw=0.75)
+        plt.plot(gamma_vals_10[1+3000:], pe_plus_values_10[1+3000:],
+                 '-g', label=r"$a \sigma = 10$", lw=0.75)
+
+        '''
         plt.plot(gamma_vals_10[1:], pa_values_10[1:],
                  '-y', label=r"$P_A$", lw=0.75)
         plt.plot(gamma_vals_10[1:], pb_values_10[1:],
@@ -73,6 +77,8 @@ if __name__ == "__main__":
                  label=r"$P_E ^{+}$", lw=0.75)
         plt.plot(gamma_vals_10[1:], lab_values_10[1:],
                  '-g', label=r"$L_{AB}$", lw=0.75)
+        '''
+
         # plt.plot(gamma_vals_10[1:], pe_minus_values_10[1:],
         #          '-k', label=r"$P_E ^{-}$")
         # plt.plot(gamma_vals_10[1:], pe_plus_values_10[1:],
@@ -80,13 +86,13 @@ if __name__ == "__main__":
         # plt.plot(gamma_vals_100[1:], pe_plus_values_100[1:],
         #          '-y', label=r"$a = 100$", lw=0.75)
         plt.ylabel(
-            r"Transition probability, $\,\mathregular{P_E^{(+)}/\,\lambda^2}$", fontsize=14)
+            r"Transition probability, $\,\mathregular{P_E^{(+)}/\,\lambda^2}$", fontsize=18)
     plt.vlines(v_line, ymin=0.0, ymax=0.525, colors="k", ls="--", lw=0.5)
     plt.xlabel(
-        r"Length ratio, $\,\mathregular{\gamma = \frac{l_B}{l_A}}$", fontsize=14)
-    plt.legend(loc='upper right', fontsize=12)
+        r"Length ratio, $\,\mathregular{\gamma = \frac{l_B}{l_A}}$", fontsize=18)
+    plt.legend(loc='upper right', fontsize=14)
     plt.ylim(0.0, 0.525)
-    plt.xlim(0.175, 1.725)
+    plt.xlim(0.45, 1.725)
     # plt.grid()
     plt.tight_layout()
     plt.savefig(
